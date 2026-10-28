@@ -11,7 +11,8 @@ from .schemas import (
     PatientRecord,
     LoginRequest,
     LoginResponse,
-    ModelMetadataResponse
+    ModelMetadataResponse,
+    PrescriptionUploadResponse
 )
 
 router = APIRouter()
@@ -239,13 +240,81 @@ def get_model_metadata():
 
 @router.post("/auth/login", response_model=LoginResponse)
 def clinician_login(creds: LoginRequest):
-    # Simulated clinician authentication for demonstration
+    # Simulated clinician or patient authentication for demonstration
+    is_patient = (creds.role == "patient")
+    user_name = creds.username.split('@')[0].replace('.', ' ').title() if creds.username else ("Emily Rose" if is_patient else "Dr. Sarah Jenkins")
+    
     return LoginResponse(
         token=f"jwt_token_{uuid.uuid4().hex}",
         user={
-            "name": creds.username.capitalize() if creds.username else "Dr. Alex Taylor",
-            "role": "Lead Endocrinologist",
-            "hospital": "Metro Clinical Health System",
-            "badge_id": "MED-78921"
+            "name": user_name,
+            "role": "Patient Portal Member" if is_patient else "Board Certified Endocrinologist",
+            "hospital": "Metropolitan Medical Institute",
+            "badge_id": "PT-39182" if is_patient else "MD-98421",
+            "email": creds.username if creds.username else "clinician@metromedical.org"
         }
+    )
+
+@router.post("/upload-prescription", response_model=PrescriptionUploadResponse)
+def upload_prescription_or_lab(data: dict):
+    # Simulated Intelligent Clinical OCR & Entity Extraction
+    filename = data.get("filename", "lab_report_scan.pdf")
+    file_type = data.get("file_type", "Lab Panel")
+    
+    # Intelligently generate realistic extracted clinical vitals based on document archetype
+    if "high" in filename.lower() or "diabetic" in filename.lower() or "elevated" in filename.lower():
+        extracted = {
+            "patient_name": "Eleanor Vance",
+            "glucose": 158.0,
+            "blood_pressure": 84.0,
+            "insulin": 185.0,
+            "bmi": 33.6,
+            "skin_thickness": 31.0,
+            "age": 52,
+            "pedigree": 0.72,
+            "pregnancies": 3
+        }
+        notes = "Fasting plasma glucose (FPG) significantly elevated at 158 mg/dL. Hyperinsulinemia noted. Recommend HbA1c screening."
+        conf = 0.96
+    elif "healthy" in filename.lower() or "normal" in filename.lower():
+        extracted = {
+            "patient_name": "Marcus Chen",
+            "glucose": 89.0,
+            "blood_pressure": 70.0,
+            "insulin": 68.0,
+            "bmi": 22.4,
+            "skin_thickness": 19.0,
+            "age": 29,
+            "pedigree": 0.22,
+            "pregnancies": 0
+        }
+        notes = "All glycaemic and metabolic parameters within reference physiological ranges. Routine annual follow-up."
+        conf = 0.98
+    else:
+        extracted = {
+            "patient_name": data.get("patient_name", "Clinical Inpatient"),
+            "glucose": 138.0,
+            "blood_pressure": 78.0,
+            "insulin": 142.0,
+            "bmi": 29.8,
+            "skin_thickness": 26.0,
+            "age": 44,
+            "pedigree": 0.52,
+            "pregnancies": 2
+        }
+        notes = "Impaired fasting glucose detected (138 mg/dL). Borderline BMI (29.8 kg/m²). Suggest metabolic health intervention."
+        conf = 0.94
+
+    return PrescriptionUploadResponse(
+        document_id=f"DOC-{uuid.uuid4().hex[:6].upper()}",
+        filename=filename,
+        detected_entities={
+            "Document Type": "Clinical Diagnostic Lab Panel",
+            "Issuing Facility": "Metropolitan Medical Institute - Central Pathology",
+            "Attending Physician": "Dr. Emily Carter, MD (Endocrinology)",
+            "Date of Test": datetime.now().strftime("%B %d, %Y")
+        },
+        extracted_vitals=extracted,
+        physician_notes=notes,
+        confidence_score=conf
     )

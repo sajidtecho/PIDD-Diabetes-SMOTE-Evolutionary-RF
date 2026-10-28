@@ -41,6 +41,7 @@ class PatientRecord(BaseModel):
 class LoginRequest(BaseModel):
     username: str
     password: str
+    role: Optional[str] = "clinician"
 
 class LoginResponse(BaseModel):
     token: str
@@ -51,3 +52,11 @@ class ModelMetadataResponse(BaseModel):
     metrics: Dict[str, float]
     feature_importances: Dict[str, float]
     decision_threshold: float
+
+class PrescriptionUploadResponse(BaseModel):
+    document_id: str
+    filename: str
+    detected_entities: Dict[str, Any]
+    extracted_vitals: Dict[str, Any]
+    physician_notes: str
+    confidence_score: float
