@@ -16,11 +16,17 @@ from .schemas import (
 
 router = APIRouter()
 
-# Load model artifact
-MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "model", "diabetes_model.joblib")
+# Load model artifact from ml_model folder (fallback to backend/model if present)
+root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ml_model_path = os.path.join(root_dir, "ml_model", "diabetes_model.joblib")
+backend_model_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "model", "diabetes_model.joblib")
 
-if not os.path.exists(MODEL_PATH):
-    raise RuntimeError(f"Model artifact not found at {MODEL_PATH}. Run train_and_export.py first.")
+if os.path.exists(ml_model_path):
+    MODEL_PATH = ml_model_path
+elif os.path.exists(backend_model_path):
+    MODEL_PATH = backend_model_path
+else:
+    raise RuntimeError(f"Model artifact not found at {ml_model_path}. Run train_and_export.py first.")
 
 payload = joblib.load(MODEL_PATH)
 model = payload["model"]

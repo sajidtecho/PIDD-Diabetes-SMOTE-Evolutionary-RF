@@ -180,7 +180,26 @@ Random Forest Gini importance identifies **Glucose**, **BMI**, and **Age** as th
 ## 📁 Repository Structure
 
 ```text
-├── assets/
+├── ml_model/                     # Machine Learning core research & model artifacts
+│   ├── Diabetes_Prediction_SMOTE_RandomForest.ipynb # Colab experiments & training notebook
+│   ├── train_and_export.py       # Production model training & serialization script
+│   ├── diabetes_model.joblib     # Exported Random Forest pipeline artifact
+│   ├── smote_rf_results.csv      # Experiment metrics export
+│   └── README.md                 # ML documentation & reproduction guide
+├── backend/                      # Production FastAPI REST API
+│   ├── api/
+│   │   ├── routes.py             # Diagnostic & EHR endpoints (/predict, /records, /model-info)
+│   │   └── schemas.py            # Pydantic validation schemas with physiological limits
+│   ├── main.py                   # FastAPI application entrypoint with CORS
+│   └── requirements.txt          # Backend Python dependencies
+├── frontend/                     # Modern React (Vite) Single Page Application
+│   ├── src/
+│   │   ├── App.jsx               # Clinical intake, circular risk gauge & EHR registry
+│   │   ├── index.css             # Glassmorphic dark design system (Vanilla CSS)
+│   │   └── main.jsx              # React DOM mount
+│   ├── index.html                # Typography (Inter/Outfit) and metadata
+│   └── vite.config.js            # Reverse proxy setup
+├── assets/                       # Diagrams, animated SVG workflows, and diagnostic plots
 │   ├── header_banner.svg         # Project header banner
 │   ├── pipeline_animation.svg    # Machine learning workflow diagram
 │   ├── smote_balance.png         # SMOTE class rebalancing plot
@@ -189,7 +208,8 @@ Random Forest Gini importance identifies **Glucose**, **BMI**, and **Age** as th
 │   ├── roc_curve.png             # Single model ROC curve (AUC = 0.864)
 │   ├── roc_comparison.png        # Comparative ROC curves (AUC = 0.871)
 │   └── model_comparison_bar.png  # Comparative bar chart across all metrics
-├── Diabetes_Prediction_SMOTE_RandomForest.ipynb # Main Google Colab Jupyter Notebook
+├── run_app.py                    # Unified application launcher (backend + frontend)
+├── .gitignore                    # Python & Node exclusion rules
 ├── README.md                     # Comprehensive project documentation
 └── LICENSE                       # MIT License
 ```
