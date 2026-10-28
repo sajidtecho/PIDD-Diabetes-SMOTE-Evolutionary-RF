@@ -30,12 +30,12 @@ This project implements an **end-to-end clinical machine learning framework** ut
 
 ---
 
-## ⚡ Animated Machine Learning Workflow
+## ⚙️ End-to-End Machine Learning Pipeline
 
-The diagram below illustrates the live data transformation and optimization lifecycle from patient intake to clinical diagnostics:
+The diagram below illustrates the complete data transformation and optimization lifecycle from patient intake to clinical diagnostics:
 
 <p align="center">
-  <img src="assets/pipeline_animation.svg" alt="Animated Machine Learning Pipeline" width="100%" />
+  <img src="assets/pipeline_animation.svg" alt="Machine Learning Pipeline Architecture" width="100%" />
 </p>
 
 ---
@@ -181,8 +181,8 @@ Random Forest Gini importance identifies **Glucose**, **BMI**, and **Age** as th
 
 ```text
 ├── assets/
-│   ├── header_banner.svg         # Animated SVG dark-mode header banner
-│   ├── pipeline_animation.svg    # Animated SVG machine learning workflow
+│   ├── header_banner.svg         # Project header banner
+│   ├── pipeline_animation.svg    # Machine learning workflow diagram
 │   ├── smote_balance.png         # SMOTE class rebalancing plot
 │   ├── confusion_matrix.png      # Test set confusion matrix
 │   ├── feature_importance.png    # Random Forest feature importance chart
