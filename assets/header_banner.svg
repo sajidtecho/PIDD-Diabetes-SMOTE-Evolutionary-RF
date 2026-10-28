@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 280" width="100%" height="280">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#051329" />
+    </linearGradient>
+
+    <!-- Glowing Accent Gradients -->
+    <linearGradient id="primary-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+
+    <linearGradient id="card-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="soft-glow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <style>
+      @keyframes pulse-glow {
+        0%, 100% { opacity: 0.5; transform: scale(1); }
+        50% { opacity: 0.85; transform: scale(1.03); }
+      }
+      @keyframes float-badge {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-3px); }
+      }
+      @keyframes dash-move {
+        from { stroke-dashoffset: 200; }
+        to { stroke-dashoffset: 0; }
+      }
+      @keyframes ecg-line {
+        0% { stroke-dashoffset: 600; }
+        100% { stroke-dashoffset: 0; }
+      }
+      .pulse {
+        transform-origin: center;
+        animation: pulse-glow 4s ease-in-out infinite;
+      }
+      .badge-1 { animation: float-badge 3.2s ease-in-out infinite; }
+      .badge-2 { animation: float-badge 3.6s ease-in-out 0.4s infinite; }
+      .badge-3 { animation: float-badge 4.0s ease-in-out 0.8s infinite; }
+      .badge-4 { animation: float-badge 4.4s ease-in-out 1.2s infinite; }
+      .ecg {
+        stroke-dasharray: 600;
+        animation: ecg-line 5s linear infinite;
+      }
+      .title-text {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+      .subtitle-text {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-weight: 400;
+        letter-spacing: 0.2px;
+      }
+      .stat-val {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-weight: 700;
+      }
+      .stat-lbl {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        font-size: 10px;
+      }
+    </style>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="960" height="280" rx="16" fill="url(#bg-grad)" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Background Decorative Glowing Orbs -->
+  <circle cx="150" cy="50" r="120" fill="#06b6d4" opacity="0.12" filter="url(#glow)" class="pulse" />
+  <circle cx="820" cy="180" r="140" fill="#3b82f6" opacity="0.12" filter="url(#glow)" class="pulse" />
+  <circle cx="480" cy="220" r="90" fill="#10b981" opacity="0.1" filter="url(#glow)" class="pulse" />
+
+  <!-- ECG Heartbeat / Vital Signal Line in Background -->
+  <path class="ecg" d="M 40 140 L 220 140 L 240 120 L 255 165 L 275 90 L 295 180 L 315 130 L 330 145 L 345 140 L 620 140 L 635 125 L 650 160 L 670 100 L 690 175 L 710 135 L 725 140 L 920 140"
+        fill="none" stroke="url(#primary-glow)" stroke-width="1.8" opacity="0.22" />
+
+  <!-- Top Decorative Tag -->
+  <g transform="translate(48, 32)">
+    <rect width="215" height="26" rx="13" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <circle cx="14" cy="13" r="4.5" fill="#10b981">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <text x="26" y="17" fill="#38bdf8" class="stat-lbl" font-size="10" font-weight="700">CLINICAL INTELLIGENCE LAB</text>
+  </g>
+
+  <!-- Title & Subtitle -->
+  <text x="48" y="98" fill="#ffffff" class="title-text" font-size="32">
+    Diabetes Prediction Engine
+  </text>
+  <text x="48" y="128" fill="#94a3b8" class="subtitle-text" font-size="14.5">
+    SMOTE Imbalance Synthesizer <tspan fill="#38bdf8">•</tspan> Genetic Algorithm Optimization <tspan fill="#38bdf8">•</tspan> Random Forest Ensemble
+  </text>
+
+  <!-- Metric Badges Row -->
+  <g transform="translate(48, 168)">
+    
+    <!-- Badge 1: Accuracy -->
+    <g class="badge-1" transform="translate(0, 0)">
+      <rect width="195" height="74" rx="12" fill="url(#card-grad)" stroke="#0284c7" stroke-width="1.2" filter="url(#soft-glow)" />
+      <circle cx="28" cy="37" r="14" fill="#0369a1" opacity="0.4" />
+      <path d="M 23 37 L 27 41 L 34 33" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="52" y="36" fill="#38bdf8" class="stat-val" font-size="22">86.36%</text>
+      <text x="52" y="54" fill="#94a3b8" class="stat-lbl">PEAK ACCURACY</text>
+    </g>
+
+    <!-- Badge 2: ROC-AUC -->
+    <g class="badge-2" transform="translate(215, 0)">
+      <rect width="195" height="74" rx="12" fill="url(#card-grad)" stroke="#6366f1" stroke-width="1.2" filter="url(#soft-glow)" />
+      <circle cx="28" cy="37" r="14" fill="#4338ca" opacity="0.4" />
+      <path d="M 20 44 C 24 38, 28 30, 36 28" fill="none" stroke="#a5b4fc" stroke-width="2.2" stroke-linecap="round" />
+      <text x="52" y="36" fill="#a5b4fc" class="stat-val" font-size="22">89.22%</text>
+      <text x="52" y="54" fill="#94a3b8" class="stat-lbl">ROC - AUC SCORE</text>
+    </g>
+
+    <!-- Badge 3: Sensitivity -->
+    <g class="badge-3" transform="translate(430, 0)">
+      <rect width="195" height="74" rx="12" fill="url(#card-grad)" stroke="#059669" stroke-width="1.2" filter="url(#soft-glow)" />
+      <circle cx="28" cy="37" r="14" fill="#047857" opacity="0.4" />
+      <path d="M 28 28 L 28 46 M 22 34 L 34 34 M 22 40 L 34 40" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
+      <text x="52" y="36" fill="#34d399" class="stat-val" font-size="22">85.19%</text>
+      <text x="52" y="54" fill="#94a3b8" class="stat-lbl">CLINICAL SENSITIVITY</text>
+    </g>
+
+    <!-- Badge 4: Leakage Prevention -->
+    <g class="badge-4" transform="translate(645, 0)">
+      <rect width="215" height="74" rx="12" fill="url(#card-grad)" stroke="#d97706" stroke-width="1.2" filter="url(#soft-glow)" />
+      <circle cx="28" cy="37" r="14" fill="#b45309" opacity="0.4" />
+      <path d="M 28 28 L 28 38 M 28 44 L 28 44.5" fill="none" stroke="#fbbf24" stroke-width="2.2" stroke-linecap="round"/>
+      <text x="50" y="36" fill="#fbbf24" class="stat-val" font-size="19">Zero-Leakage</text>
+      <text x="50" y="54" fill="#94a3b8" class="stat-lbl">3-WAY SPLIT VALIDATED</text>
+    </g>
+  </g>
+</svg>
