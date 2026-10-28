@@ -1049,7 +1049,7 @@ export default function App() {
                   <Heart size={18} className="icon-rose" />
                   <div>
                     <h3 className="card-title">Diagnostic Intelligence Output</h3>
-                    <p className="card-subtitle">Calibrated threshold $\tau = 0.42$ for maximal clinical recall</p>
+                    <p className="card-subtitle">Calibrated threshold τ = 0.42 for maximal clinical recall</p>
                   </div>
                 </div>
                 <span className="badge-calibrated">τ = 0.42 Cutoff</span>
@@ -1548,7 +1548,7 @@ export default function App() {
             <h2 className="section-heading">Evolutionary SMOTE-Random Forest Architecture</h2>
             <p className="section-subtext">
               Engineered specifically for clinical decision support. Addresses severe medical dataset class imbalance 
-              without synthetic test leakage, calibrated for uncompromising sensitivity ($85.19\%$).
+              without synthetic test leakage, calibrated for uncompromising sensitivity (85.19%).
             </p>
           </div>
 
@@ -1570,13 +1570,13 @@ export default function App() {
 
               <div className="cutoff-simulator-content">
                 <p className="simulator-explainer">
-                  Standard machine learning models set $\tau = 0.50$, missing up to <strong>28% of early diabetics</strong>. 
-                  Our evolutionary search identified $\tau = 0.42$ as the Pareto-optimal threshold.
+                  Standard machine learning models set τ = 0.50, missing up to <strong>28% of early diabetics</strong>. 
+                  Our evolutionary search identified τ = 0.42 as the Pareto-optimal threshold.
                 </p>
 
                 <div className="sim-slider-box">
                   <div className="sim-slider-meta">
-                    <span>Decision Threshold ($\tau$)</span>
+                    <span>Decision Threshold (τ)</span>
                     <strong>{simCutoff}</strong>
                   </div>
                   <input 
@@ -2001,7 +2001,7 @@ export default function App() {
               <h5 className="footer-col-title">Model Science</h5>
               <ul className="footer-links-list">
                 <li><a href="#science">Zero-Leakage SMOTE</a></li>
-                <li><a href="#science">Cutoff Calibration ($\tau=0.42$)</a></li>
+                <li><a href="#science">Cutoff Calibration (τ = 0.42)</a></li>
                 <li><a href="#science">ROC-AUC Validation</a></li>
                 <li><a href="#science">Gini Impurity Decomposition</a></li>
                 <li><a href="#science">Clinical Whitepaper (2026)</a></li>
